@@ -1,20 +1,33 @@
 import React from "react";
+import { Grid, Row, Col} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
-import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
+import Jumbotron from "./components/Jumbotron";
+import Form from "./components/Form";
+import Results from "./components/Results";
+import Saved from "./components/Saved";
+import Footer from "./components/Footer";
+import "./App.css"
+
+
+
 
 const App = () => (
   <Router>
     <div>
-      <Nav />
-      <Switch>
-        <Route exact path="/" component={Books} />
-        <Route exact path="/books" component={Books} />
-        <Route exact path="/books/:id" component={Detail} />
-        <Route component={NoMatch} />
-      </Switch>
+      <Jumbotron />
+        <Grid>
+         <Row className="show-grid">
+           <Col xs={12} md={12}>
+            <Form />
+            <Results />
+            <Saved />
+
+
+
+            </Col>
+          </Row>
+        </Grid>
+      <Footer />
     </div>
   </Router>
 );

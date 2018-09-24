@@ -1,0 +1,52 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+  
+html, body, #root {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.navbar {
+  background: #3c3c3c;
+}
+
+.jumbotron {
+  font-family: 'Noto Serif KR', sans-serif;
+  background: #d8d8d8;
+}
+
+.form {
+  margin: auto;
+  width: 80%;
+  align-content: center;
+}
+
+.input {
+  margin: 0px 0 10px 0;
+}
+
+.results {
+  margin: auto;
+  width: 80%;
+  padding: 25px 0 25px 0;
+}
+
+.saved {
+  margin: auto;
+  width: 80%;
+  padding: 25px 0 25px 0;
+}
+
+.footer {
+    margin: auto auto 0 auto;
+    text-align: center;
+    background-color: #3c3c3c;
+    color: #fff;
+    padding: 20px;
+  }
+  
+.footer a {
+    color:#fff;
+  }
