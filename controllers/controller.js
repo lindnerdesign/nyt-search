@@ -37,7 +37,6 @@ module.exports = {
   // }
 
   saveArticle:  function(req, res){
-    console.log("Save Article Path hit");
     db.Article.findOne({articleId: req.body.articleId})
     .then(function(response){
       if (response === null) { // Only Create Article if it has not been Created
@@ -50,7 +49,6 @@ module.exports = {
   },
 
   getSavedArticles: function(req, res){
-    console.log("Get Saved Articles Path hit");
      db.Article
       .find({})
       .sort({ date: -1 })
@@ -59,7 +57,6 @@ module.exports = {
   },
 
   deleteSavedArticle: function(req, res){
-    console.log("Delete Articles Path hit");
     console.log(JSON.stringify(req.body));
     db.Article
     .remove({articleId: req.body.articleId}, (err)=>{
@@ -75,9 +72,4 @@ module.exports = {
       })
        .catch(err => res.status(422).json(err));
   }
-
-
-
-
-
 };

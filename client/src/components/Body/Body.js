@@ -11,17 +11,17 @@ class Body extends React.Component {
       articleId: "",
       title: "",
       date: "",
+      url: "",
       topic: "",
       startyear: "",
-      endyear: "",
-      url: ""
+      endyear: ""
     };
   
     componentDidMount() {
       this.loadArticle();
     }
   
-    loadArticle = query => {
+    loadArticle = (query) => {
       API.search(query)
         .then(res => this.setState({ article: res.data, title: "", date: "", url: "" }))
         .catch(err => console.log(err));
@@ -42,6 +42,7 @@ class Body extends React.Component {
   
     handleFormSubmit = event => {
       event.preventDefault();
+      console.log(this.state.topic);
         API.search({
           topic: this.state.topic,
           startyear: this.state.startyear,
@@ -62,34 +63,35 @@ class Body extends React.Component {
                     <h1>Search Articles</h1>
                     <ControlLabel>Topic</ControlLabel>
                     <FormControl
+                        className="form-control"
                         name="topic"
-                        className="input"
-                        type="text"
+                        type="input"
                         value={this.state.topic}
                         placeholder="Article Topic"
-                        onChange={this.handleChange}
+                        onChange={this.handleInputChange}
                     />
 
-                    <ControlLabel className="start">Start Year</ControlLabel>
-                    <FormControl 
+                    <ControlLabel>Start Year</ControlLabel>
+                    <FormControl
+                        className="form-control"
                         name="startyear"
                         className="input"
-                        type="text"
+                        type="input"
                         value={this.state.startyear}
-                        placeholder="YYYYMMDD"
-                        onChange={this.handleChange}
+                        placeholder="YYYY"
+                        onChange={this.handleInputChange}
                     />
 
                     <ControlLabel>End Year</ControlLabel>
                     <FormControl
+                        className="form-control"
                         name="endyear"
-                        className="input"
-                        type="text"
+                        type="input"
                         value={this.state.endyear}
-                        placeholder="YYYYMMDD"
-                        onChange={this.handleChange}
+                        placeholder="YYYY"
+                        onChange={this.handleInputChange}
                     />
-                    <button type="submit" onClick={() => this.handleFormSubmit()} className="btn btn-danger center-block">Search</button> 
+                    <button type="submit" onClick={this.handleFormSubmit} className="btn btn-danger center-block">Search</button> 
                 </FormGroup>
 
                 <h1 className="results">Article Results</h1>

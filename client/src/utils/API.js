@@ -8,8 +8,9 @@ export default {
   // Gets all articles
   search: function(topic,startyear,endyear) {
     let url = "";
-    url = `${BASEURL}${APIKEY}&q=${topic}?end_date=${endyear}?begin_date${startyear}`
-    return axios.get(BASEURL + APIKEY + query);
+    url = `${BASEURL}${APIKEY}&q=${topic}&end_date=${endyear}1231&begin_date${startyear}0101`;
+    console.log(topic)
+    return axios.get(url);
   },
   // Gets the book with the given id
   getSavedArticles: function(id) {
