@@ -8,9 +8,12 @@ import API from "../../utils/API";
 class Body extends React.Component {
     state = {
       article: [],
+      articleId: "",
       title: "",
       date: "",
-      synopsis:"",
+      topic: "",
+      startyear: "",
+      endyear: "",
       url: ""
     };
   
@@ -18,16 +21,14 @@ class Body extends React.Component {
       this.loadArticle();
     }
   
-    loadArticle = () => {
-      API.getArticle()
-        .then(res =>
-          this.setState({ article: res.data, title: "", date: "", synopsis:"", url: "" })
-        )
+    loadArticle = query => {
+      API.search(query)
+        .then(res => this.setState({ article: res.data, title: "", date: "", url: "" }))
         .catch(err => console.log(err));
     };
-  
+ 
     deleteArticle = id => {
-      API.deleteArticle(id)
+      API.deleteSavedArticle(id)
         .then(res => this.loadArticle())
         .catch(err => console.log(err));
     };
@@ -41,16 +42,13 @@ class Body extends React.Component {
   
     handleFormSubmit = event => {
       event.preventDefault();
-      if (this.state.title && this.state.date) {
-        API.saveArticle({
-          title: this.state.title,
-          date: this.state.date,
-          synopsis: this.state.synopsis,
-          url: this.state.url
+        API.search({
+          topic: this.state.topic,
+          startyear: this.state.startyear,
+          endyear: this.state.endyear
         })
           .then(res => this.loadArticle())
           .catch(err => console.log(err));
-      }
     };
   
     render() {
@@ -64,31 +62,34 @@ class Body extends React.Component {
                     <h1>Search Articles</h1>
                     <ControlLabel>Topic</ControlLabel>
                     <FormControl
+                        name="topic"
                         className="input"
                         type="text"
-                        value={this.state.value}
+                        value={this.state.topic}
                         placeholder="Article Topic"
                         onChange={this.handleChange}
                     />
 
                     <ControlLabel className="start">Start Year</ControlLabel>
                     <FormControl 
+                        name="startyear"
                         className="input"
                         type="text"
-                        value={this.state.value}
-                        placeholder="00/00/0000"
+                        value={this.state.startyear}
+                        placeholder="YYYYMMDD"
                         onChange={this.handleChange}
                     />
 
                     <ControlLabel>End Year</ControlLabel>
-                    <FormControl 
+                    <FormControl
+                        name="endyear"
                         className="input"
                         type="text"
-                        value={this.state.value}
-                        placeholder="00/00/0000"
+                        value={this.state.endyear}
+                        placeholder="YYYYMMDD"
                         onChange={this.handleChange}
                     />
-                    <button type="submit" href="/" className="btn btn-danger center-block">Search</button> 
+                    <button type="submit" onClick={() => this.handleFormSubmit()} className="btn btn-danger center-block">Search</button> 
                 </FormGroup>
 
                 <h1 className="results">Article Results</h1>
@@ -99,7 +100,7 @@ class Body extends React.Component {
                         <ListItem key={article._id}>
                           <Link to={"/" + article._id}>
                             <strong>
-                              {article.title} by {article.author}
+                              {article.title} date: {article.date}
                             </strong>
                           </Link>
                           <DeleteBtn onClick={() => this.deleteArticle(article._id)} />
