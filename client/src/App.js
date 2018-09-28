@@ -11,7 +11,7 @@ const App = () => (
       <Jumbotron />
         <Switch>
           <Route exact path="/" component={Body} />
-          {/* <Route component={NoMatch} /> */}
+         
         </Switch>
       <Footer />
     </div>

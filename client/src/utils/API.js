@@ -13,15 +13,15 @@ export default {
     return axios.get(url);
   },
   // Gets the book with the given id
-  getSavedArticles: function(id) {
-    return axios.get('/getSavedArticles');
+  getArticle: function(id) {
+    return axios.get("/api/articles/" + id);
   },
   // Deletes the book with the given id
-  deleteSavedArticle: function(id) {
-    return axios.delete('/deleteSavedArticle', {data: {articleId: id}});
+  deleteArticle: function(id) {
+    return axios.delete("/api/articles/" + id);
   },
   // Saves a article to the database
   saveArticle: function(articleData) {
-    return axios.post('/saveArticle', articleData);
+    return axios.post("/api/books", articleData);
   }
 };

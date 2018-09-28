@@ -5,6 +5,7 @@ import { List, ListItem } from "../List";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
 
+
 class Body extends React.Component {
     state = {
       article: [],
@@ -18,12 +19,12 @@ class Body extends React.Component {
     };
   
     componentDidMount() {
-      // this.loadArticle();
+      this.loadArticle();
     }
-  
+
     loadArticle = (query) => {
       API.search(query)
-        .then(res => this.setState({ article: res.data, title: "", date: "", url: "", topic:""}))
+        .then(res => this.setState({ article: res.data, title: "", date: "", url: ""}))
         .catch(err => console.log(err));
     };
  
@@ -48,7 +49,7 @@ class Body extends React.Component {
           startyear: this.state.startyear,
           endyear: this.state.endyear
         })
-          .then(res => console.log(res))
+          // .then(res => loadArticle())
           .catch(err => console.log(err));
     };
   
@@ -75,7 +76,6 @@ class Body extends React.Component {
                     <FormControl
                         className="form-control"
                         name="startyear"
-                        className="input"
                         type="input"
                         value={this.state.startyear}
                         placeholder="YYYY"
