@@ -2,6 +2,6 @@ const router = require("express").Router();
 const articleRoutes = require("./articles");
 
 // Articles routes
-router.use("/", articleRoutes);
+router.use("/articles", articleRoutes);
 
 module.exports = router;

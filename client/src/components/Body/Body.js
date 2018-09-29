@@ -1,6 +1,6 @@
 import React from "react";
 import { FormGroup, ControlLabel, FormControl, Grid, Row, Col } from 'react-bootstrap';
-import DeleteBtn from "../DeleteBtn";
+import Btn from "../Btn";
 import { List, ListItem } from "../List";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
@@ -9,6 +9,7 @@ import API from "../../utils/API";
 class Body extends React.Component {
     state = {
       article: [],
+      results: [],
       articleId: "",
       title: "",
       date: "",
@@ -18,21 +19,32 @@ class Body extends React.Component {
       endyear: ""
     };
   
-    // componentDidMount() {
+    componentDidMount() {
+      this.loadArticle();
+    }
 
-    //   this.loadArticle();
-    // }
-
-    loadArticle = (query) => {
-      API.search(query)
+    loadArticle = () => {
+      API.getArticles()
+        .then (res => {
+          this.setState({article:res.data})
+        })
         .catch(err => console.log(err));
     };
  
     deleteArticle = id => {
-      API.deleteSavedArticle(id)
+      API.deleteArticle(id)
         .then(res => this.loadArticle())
         .catch(err => console.log(err));
     };
+
+    saveArticle = (article) => {
+      // console.log(JSON.stringify(article))
+      API.saveArticle(article)
+        .then((res)=> {
+          console.log(res.data)
+        })
+        .catch(err => console.log(err));
+    }
   
     handleInputChange = event => {
       const { name, value } = event.target;
@@ -51,7 +63,7 @@ class Body extends React.Component {
         })
           .then(res => {
             console.log(res.data);
-            this.setState({ article: res.data.response.docs, title: res.data.response.docs[0].headline.main, date: "", url: ""});
+            this.setState({ results: res.data.response.docs, title: res.data.response.docs[0].headline.main, date: "", url: ""});
            
           })
           .catch(err => console.log(err));
@@ -99,26 +111,50 @@ class Body extends React.Component {
                 </FormGroup>
 
                 <h1 className="results">Article Results</h1>
-                
-                {this.state.article.length ? (
+
+                {this.state.results.length ? (
                     <List>
-                      {this.state.article.map(article => (
+                      {this.state.results.map(article => (
                         <ListItem key={article._id}>
-                          <Link to={"/" + article._id}>
+                          <Link to={article.web_url}>
                             <strong>
-                              { article.headline.main } date: { article.pub_date }
-                              { article.web_url}
+                              <h3>{ article.headline.main }</h3>
+                              <p>{ article.web_url }</p>
+                              <p>{ article.pub_date }</p>
                             </strong>
                           </Link>
-                          <DeleteBtn onClick={() => this.deleteArticle(article._id)} />
+                          <Btn className="btn btn-success"
+                          onClick={() => this.saveArticle({title: article.headline.main, url: article.web_url, date: article.pub_date})}>
+                          Save
+                          </Btn>
                         </ListItem>
                       ))}
                     </List>
                   ) : (
                     <h3>No Results to Display</h3>
                   )}
+                <h1 className="saved">Saved Articles</h1>
 
-                <h1 className="results">Saved Articles</h1>
+                {this.state.article.length ? (
+                    <List>
+                      {this.state.article.map(article => (
+                        <ListItem key={article._id}>
+                          <Link to={article.url}>
+                            <strong>
+                              <h3>{ article.title }</h3>
+                              <p>{ article.url }</p>
+                              <p>{ article.date }</p>
+                            </strong>
+                          </Link>
+                          <Btn className="btn btn-danger" onClick={() => this.deleteArticle(article._id)}>
+                          delete
+                          </Btn>
+                        </ListItem>
+                      ))}
+                    </List>
+                  ) : (
+                    <h3>No Results to Display</h3>
+                  )}
             </Col>
         </Row>
     </Grid>

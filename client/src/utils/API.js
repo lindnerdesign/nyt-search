@@ -12,6 +12,9 @@ export default {
     // console.log(topic)
     return axios.get(url);
   },
+  getArticles: function() {
+    return axios.get("/api/articles/")
+  },
   // Gets the book with the given id
   getArticle: function(id) {
     return axios.get("/api/articles/" + id);
@@ -22,6 +25,7 @@ export default {
   },
   // Saves a article to the database
   saveArticle: function(articleData) {
-    return axios.post("/api/books", articleData);
+    // console.log(`API save: ${JSON.stringify(articleData)}`)
+    return axios.post("/api/articles", articleData);
   }
 };
