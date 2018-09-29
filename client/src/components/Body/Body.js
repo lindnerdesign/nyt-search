@@ -40,10 +40,8 @@ class Body extends React.Component {
     saveArticle = (article) => {
       // console.log(JSON.stringify(article))
       API.saveArticle(article)
-        .then((res)=> {
-          console.log(res.data)
-        })
-        .catch(err => console.log(err));
+      .then(res => this.loadArticle())
+      .catch(err => console.log(err));
     }
   
     handleInputChange = event => {
