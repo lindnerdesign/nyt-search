@@ -18,13 +18,13 @@ class Body extends React.Component {
       endyear: ""
     };
   
-    componentDidMount() {
-      this.loadArticle();
-    }
+    // componentDidMount() {
+
+    //   this.loadArticle();
+    // }
 
     loadArticle = (query) => {
       API.search(query)
-        .then(res => this.setState({ article: res.data, title: "", date: "", url: ""}))
         .catch(err => console.log(err));
     };
  
@@ -43,13 +43,17 @@ class Body extends React.Component {
   
     handleFormSubmit = event => {
       event.preventDefault();
-      console.log(this.state.topic);
+      // console.log(this.state.topic);
         API.search({
           topic: this.state.topic,
           startyear: this.state.startyear,
           endyear: this.state.endyear
         })
-          // .then(res => loadArticle())
+          .then(res => {
+            console.log(res.data);
+            this.setState({ article: res.data.response.docs, title: res.data.response.docs[0].headline.main, date: "", url: ""});
+           
+          })
           .catch(err => console.log(err));
     };
   
@@ -95,14 +99,15 @@ class Body extends React.Component {
                 </FormGroup>
 
                 <h1 className="results">Article Results</h1>
-
+                
                 {this.state.article.length ? (
                     <List>
                       {this.state.article.map(article => (
                         <ListItem key={article._id}>
                           <Link to={"/" + article._id}>
                             <strong>
-                              {article.title} date: {article.date}
+                              { article.headline.main } date: { article.pub_date }
+                              { article.web_url}
                             </strong>
                           </Link>
                           <DeleteBtn onClick={() => this.deleteArticle(article._id)} />
