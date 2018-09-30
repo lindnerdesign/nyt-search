@@ -116,7 +116,7 @@ class Body extends React.Component {
                         <ListItem key={article._id}>
                           {/* <Link > */}
                             <strong>
-                              <h3>{ article.headline.main }</h3>
+                              <h3 className="headlineResults">{ article.headline.main }</h3>
                               <p>{ article.web_url }</p>
                               <p>{ article.pub_date }</p>
                             </strong>
@@ -139,7 +139,7 @@ class Body extends React.Component {
                         <ListItem key={article._id}>
                           {/* <Link to={article.url}> */}
                             <strong>
-                              <h3>{ article.title }</h3>
+                              <h3 className="headlineSaved">{ article.title }</h3>
                               <p>{ article.url }</p>
                               <p>{ article.date }</p>
                             </strong>

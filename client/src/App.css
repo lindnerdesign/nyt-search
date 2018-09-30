@@ -14,7 +14,10 @@ html, body, #root {
 
 .jumbotron {
   font-family: 'Noto Serif KR', sans-serif;
-  background: #d8d8d8;
+  background-image: url("/thetimes.jpg");
+  height: 244px;
+  display: flex;
+ align-items: center;
 }
 
 .form {
@@ -37,6 +40,10 @@ html, body, #root {
   margin: auto;
   width: 100%;
   padding: 75px 0 25px 0;
+}
+
+.headlineResults, .headlineSaved {
+ color: crimson; 
 }
 
 .footer {
