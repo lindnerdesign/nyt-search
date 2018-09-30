@@ -1,4 +1,5 @@
 .btn {
+  position: relative;
   float: right;
-  padding-bottom: 50px;
+  height: auto;
 }

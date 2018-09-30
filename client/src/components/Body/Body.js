@@ -2,7 +2,7 @@ import React from "react";
 import { FormGroup, ControlLabel, FormControl, Grid, Row, Col } from 'react-bootstrap';
 import Btn from "../Btn";
 import { List, ListItem } from "../List";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import API from "../../utils/API";
 
 
@@ -114,13 +114,13 @@ class Body extends React.Component {
                     <List>
                       {this.state.results.map(article => (
                         <ListItem key={article._id}>
-                          <Link to={article.web_url}>
+                          {/* <Link > */}
                             <strong>
                               <h3>{ article.headline.main }</h3>
                               <p>{ article.web_url }</p>
                               <p>{ article.pub_date }</p>
                             </strong>
-                          </Link>
+                          {/* </Link> */}
                           <Btn className="btn btn-success"
                           onClick={() => this.saveArticle({title: article.headline.main, url: article.web_url, date: article.pub_date})}>
                           Save
@@ -137,13 +137,13 @@ class Body extends React.Component {
                     <List>
                       {this.state.article.map(article => (
                         <ListItem key={article._id}>
-                          <Link to={article.url}>
+                          {/* <Link to={article.url}> */}
                             <strong>
                               <h3>{ article.title }</h3>
                               <p>{ article.url }</p>
                               <p>{ article.date }</p>
                             </strong>
-                          </Link>
+                          {/* </Link> */}
                           <Btn className="btn btn-danger" onClick={() => this.deleteArticle(article._id)}>
                           delete
                           </Btn>
@@ -151,7 +151,7 @@ class Body extends React.Component {
                       ))}
                     </List>
                   ) : (
-                    <h3>No Results to Display</h3>
+                    <h3>No Saved to Articles</h3>
                   )}
             </Col>
         </Row>

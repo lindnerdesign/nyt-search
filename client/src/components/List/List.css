@@ -1,19 +1,20 @@
 .list-overflow-container {
-  /* max-height: 545px; */
+  max-height: 545px;
   border: 1px #DDDDDD solid;
   border-radius: 4px;
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: visible;
 }
 
 .list-overflow-container ul {
-  margin: 0;
+  margin: auto;
 }
 
 .list-overflow-container li {
   border-radius: 0px;
   border-left: none;
   border-right: none;
+  padding-bottom: 50px;
 }
 
 .list-overflow-container li * {
@@ -21,7 +22,7 @@
 }
 
 .list-overflow-container li a {
-  /* color: #000; */
+  color: #2A878C;
 }
 
 .list-overflow-container li:first-child {
