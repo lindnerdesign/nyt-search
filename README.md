@@ -6,7 +6,7 @@ React-based New York Times Article Search application. React components, work wi
 
 **React NYT Search**
 
-![Home Screen](./public/title.png)
+![Home Screen](client/public/title.png)
 
 ![Survey Page](public/search.png)
 
