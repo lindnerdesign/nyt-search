@@ -8,9 +8,9 @@ React-based New York Times Article Search application. React components, work wi
 
 ![Home Screen](client/public/title.png)
 
-![Survey Page](public/search.png)
+![Survey Page](client/public/search.png)
 
-![API Object](public/articles.png)
+![API Object](client/public/articles.png)
 
 [View Full Project](https://limitless-stream-82216.herokuapp.com)
 
