@@ -8,7 +8,11 @@ React-based New York Times Article Search application. React components, work wi
 
 ![Home Screen](client/public/title.png)
 
+**Search Results**
+
 ![Survey Page](client/public/search.png)
+
+**Saved Articles**
 
 ![API Object](client/public/articles.png)
 
